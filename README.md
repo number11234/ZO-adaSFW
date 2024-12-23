@@ -51,34 +51,34 @@ All code is in ./content/Optimization_Project_2020_2021 (1).py
 
 There are 10 algorithms. Select algorithm to run
 
- loss_Z, x_Z,_=ZSCG(epochs, 784, 0.1, 30, x, y_true_in,10**-5,10**-1, verbose=True)
+    loss_Z, x_Z,_=ZSCG(epochs, 784, 0.1, 30, x, y_true_in,10**-5,10**-1, verbose=True)
 
- loss_FZ, x_FZ,_=FZFW(epochs, 784,n, 0.1,10**-1,10**-3 ,x, y_true_in, verbose=True)
+    loss_FZ, x_FZ,_=FZFW(epochs, 784,n, 0.1,10**-1,10**-3 ,x, y_true_in, verbose=True)
 
- loss_ZOAda, ZOAda,_=ZO_AdaSFW(epochs, 2, 784,n, 0.1,10**-1,10**-3 ,x, y_true_in, verbose=True)
+    loss_ZOAda, ZOAda,_=ZO_AdaSFW(epochs, 2, 784,n, 0.1,10**-1,10**-3 ,x, y_true_in, verbose=True)
 
-loss_ZOSFW, x_Z,_=ZO_SFW(epochs, 784, 0.1, 30, x, y_true_in,10**-5,10**-1, verbose=True)
+    loss_ZOSFW, x_Z,_=ZO_SFW(epochs, 784, 0.1, 30, x, y_true_in,10**-5,10**-1, verbose=True)
 
-loss_Acc_SZOFW_U, x_Z,_=Acc_SZOFW_Uni(epochs, n, 784, 0.1, 30, x, y_true_in,10**-5,10**-1, verbose=True)
+    loss_Acc_SZOFW_U, x_Z,_=Acc_SZOFW_Uni(epochs, n, 784, 0.1, 30, x, y_true_in,10**-5,10**-1, verbose=True)
 
-loss_Acc_SZOFW_C, x_Z,_=Acc_SZOFW_Coo(epochs, n, 784, 0.1, -1, x, y_true_in,10**-5,10**-1, verbose=True)
+    loss_Acc_SZOFW_C, x_Z,_=Acc_SZOFW_Coo(epochs, n, 784, 0.1, -1, x, y_true_in,10**-5,10**-1, verbose=True)
 
-loss_Acc_SZOFWX_U, x_Z,_=Acc_SZOFWX_Uni(epochs, n, 784, 0.1, 30, x, y_true_in,10**-5,10**-1, verbose=True)
+    loss_Acc_SZOFWX_U, x_Z,_=Acc_SZOFWX_Uni(epochs, n, 784, 0.1, 30, x, y_true_in,10**-5,10**-1, verbose=True)
 
-loss_Acc_SZOFWX_C, x_Z,_=Acc_SZOFWX_Coo(epochs, n, 784, 0.1, -1, x, y_true_in,10**-5,10**-1, verbose=True)
+    loss_Acc_SZOFWX_C, x_Z,_=Acc_SZOFWX_Coo(epochs, n, 784, 0.1, -1, x, y_true_in,10**-5,10**-1, verbose=True)
 
-loss_SFW_Grad, x_Z,_=SFW_Grad(epochs, 784, 0.1, 30, x, y_true_in,10**-5,10**-1, verbose=True)
+    loss_SFW_Grad, x_Z,_=SFW_Grad(epochs, 784, 0.1, 30, x, y_true_in,10**-5,10**-1, verbose=True)
 
 
 """
 
-with tf.Session() as sess:
+    with tf.Session() as sess:
 
-    sess.run(tf.global_variables_initializer()) 
+        sess.run(tf.global_variables_initializer()) 
  
-    dnn.load_weights(path)
+        dnn.load_weights(path)
  
-    loss_AdaSFW = AdaSFW(epochs, 2,784,n, 0.1,10**-1 ,x, y_true_in, verbose=True,sess=sess)
+        loss_AdaSFW = AdaSFW(epochs, 2,784,n, 0.1,10**-1 ,x, y_true_in, verbose=True,sess=sess)
  
 """
 
