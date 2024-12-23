@@ -4,9 +4,9 @@
 
 clc; clear all; close all;
 
-% clc£ºÇå¿ÕÃüÁî´°¿Ú¡£ÔÚÕâÀïÒâÎ¶×ÅºöÂÔÖ®Ç°µÄÈÎºÎÊä³ö¡£
-% clear all£º´Ó¹¤×÷¿Õ¼äÖÐÒÆ³ýËùÓÐ±äÁ¿¡£ÎÒÃÇÕâÀïÃ»ÓÐ»î¶¯±äÁ¿£¬µ«Èç¹ûÓÐµÄ»°£¬ËüÃÇÏÖÔÚ»á±»Çå³ý¡£
-% close all£º¹Ø±ÕËùÓÐÍ¼ÐÎ´°¿Ú¡£¼ÈÈ»ÎÒÃÇ²»ÔÚ MATLAB »·¾³ÖÐÔËÐÐ£¬Ò²¾ÍÃ»ÓÐÍ¼ÐÎ´°¿Ú¿ÉÒÔ¹Ø±Õ£¬µ«Èç¹ûÓÐµÄ»°£¬ËüÃÇÏÖÔÚ»á±»¹Ø±Õ¡£
+% clcï¼šæ¸…ç©ºå‘½ä»¤çª—å£ã€‚åœ¨è¿™é‡Œæ„å‘³ç€å¿½ç•¥ä¹‹å‰çš„ä»»ä½•è¾“å‡ºã€‚
+% clear allï¼šä»Žå·¥ä½œç©ºé—´ä¸­ç§»é™¤æ‰€æœ‰å˜é‡ã€‚æˆ‘ä»¬è¿™é‡Œæ²¡æœ‰æ´»åŠ¨å˜é‡ï¼Œä½†å¦‚æžœæœ‰çš„è¯ï¼Œå®ƒä»¬çŽ°åœ¨ä¼šè¢«æ¸…é™¤ã€‚
+% close allï¼šå…³é—­æ‰€æœ‰å›¾å½¢çª—å£ã€‚æ—¢ç„¶æˆ‘ä»¬ä¸åœ¨ MATLAB çŽ¯å¢ƒä¸­è¿è¡Œï¼Œä¹Ÿå°±æ²¡æœ‰å›¾å½¢çª—å£å¯ä»¥å…³é—­ï¼Œä½†å¦‚æžœæœ‰çš„è¯ï¼Œå®ƒä»¬çŽ°åœ¨ä¼šè¢«å…³é—­ã€‚
 
 
 
@@ -14,17 +14,17 @@ clc; clear all; close all;
 %%% targets/field points to be monitored 
 load('dataSample_sensrSel.mat','A_allT','Locs_sensors','Loc_target');
 Ntar = size(A_allT,1); %%% num. of field points to be estimated  5     A_allT = 5*50*1000
-Nsen = size(A_allT,2); %%% number of sensors, problem size, dimension of optimization variables ²ÎÊýµÄÎ¬¶È 50
+Nsen = size(A_allT,2); %%% number of sensors, problem size, dimension of optimization variables å‚æ•°çš„ç»´åº¦ 50
 Ksel_vec = 5:5:20;  %%% desired selected sensors [5 10 15 20]
 
-% ÄãÊ¹ÓÃ load ÃüÁî¼ÓÔØÁËÈý¸ö±äÁ¿£ºA_allT£¨¹Û²âÔöÒæ¾ØÕó£©¡¢Locs_sensors£¨´«¸ÐÆ÷µÄÎ»ÖÃ£©ºÍ
-% Loc_target£¨Ä¿±ê/¼à²âµãµÄÎ»ÖÃ£©.ÕâÐ©Êý¾ÝÀ´×ÔÎÄ¼þ dataSample_sensrSel.mat
-% Ntar ±»¶¨ÒåÎª¹Û²âÔöÒæ¾ØÕó A_allT µÄÐÐÊý£¬Õâ±íÊ¾ÐèÒª¹À¼ÆµÄÄ¿±ê»ò¼à²âµãµÄÊýÁ¿¡£
-% Nsen ±»¶¨ÒåÎª¹Û²âÔöÒæ¾ØÕó A_allT µÄÁÐÊý£¬Õâ±íÊ¾´«¸ÐÆ÷µÄÊýÁ¿£¬Í¬Ê±Ò²ÊÇÓÅ»¯ÎÊÌâµÄ¹æÄ£¡£
-% Ksel_vec ¶¨ÒåÁËÒ»¸öÏòÁ¿£¬ÆäÖÐ°üº¬ËùÐèµÄ´«¸ÐÆ÷ÊýÁ¿£¬·¶Î§ÊÇ´Ó 5 µ½ 20£¬²½³¤Îª 5¡£
+% ä½ ä½¿ç”¨ load å‘½ä»¤åŠ è½½äº†ä¸‰ä¸ªå˜é‡ï¼šA_allTï¼ˆè§‚æµ‹å¢žç›ŠçŸ©é˜µï¼‰ã€Locs_sensorsï¼ˆä¼ æ„Ÿå™¨çš„ä½ç½®ï¼‰å’Œ
+% Loc_targetï¼ˆç›®æ ‡/ç›‘æµ‹ç‚¹çš„ä½ç½®ï¼‰.è¿™äº›æ•°æ®æ¥è‡ªæ–‡ä»¶ dataSample_sensrSel.mat
+% Ntar è¢«å®šä¹‰ä¸ºè§‚æµ‹å¢žç›ŠçŸ©é˜µ A_allT çš„è¡Œæ•°ï¼Œè¿™è¡¨ç¤ºéœ€è¦ä¼°è®¡çš„ç›®æ ‡æˆ–ç›‘æµ‹ç‚¹çš„æ•°é‡ã€‚
+% Nsen è¢«å®šä¹‰ä¸ºè§‚æµ‹å¢žç›ŠçŸ©é˜µ A_allT çš„åˆ—æ•°ï¼Œè¿™è¡¨ç¤ºä¼ æ„Ÿå™¨çš„æ•°é‡ï¼ŒåŒæ—¶ä¹Ÿæ˜¯ä¼˜åŒ–é—®é¢˜çš„è§„æ¨¡ã€‚
+% Ksel_vec å®šä¹‰äº†ä¸€ä¸ªå‘é‡ï¼Œå…¶ä¸­åŒ…å«æ‰€éœ€çš„ä¼ æ„Ÿå™¨æ•°é‡ï¼ŒèŒƒå›´æ˜¯ä»Ž 5 åˆ° 20ï¼Œæ­¥é•¿ä¸º 5ã€‚
 
-mse_track_OADMM = zeros(length(Ksel_vec),1);  %%% MSE based on sensor selection schemes using OADMM ¡£ 4ÐÐ1ÁÐµÄ¾ØÕó  
-mse_track_ZOADMM = zeros(length(Ksel_vec),1);  %%% MSE based on sensor selection schemes using ZOADMM¡£ 4ÐÐ1ÁÐµÄ¾ØÕó
+mse_track_OADMM = zeros(length(Ksel_vec),1);  %%% MSE based on sensor selection schemes using OADMM ã€‚ 4è¡Œ1åˆ—çš„çŸ©é˜µ  
+mse_track_ZOADMM = zeros(length(Ksel_vec),1);  %%% MSE based on sensor selection schemes using ZOADMMã€‚ 4è¡Œ1åˆ—çš„çŸ©é˜µ
 mse_track_ZO_adaSFW = zeros(length(Ksel_vec),1);
 mse_track_ZSCG = zeros(length(Ksel_vec),1);
 mse_track_ZO_SFW = zeros(length(Ksel_vec),1);
@@ -45,7 +45,7 @@ xsel_track_ZO_SFW = zeros(Nsen,length(Ksel_vec),1);
 
 
 
-% ´´½¨Ò»¸ö3Î¬Êý×é Nsen*4*1
+% åˆ›å»ºä¸€ä¸ª3ç»´æ•°ç»„ Nsen*4*1
 % eps_track_OADMM = [];  %%% update error trajectory
 % eps_track_ZOADMM = [];
 
@@ -53,12 +53,12 @@ xsel_track_ZO_SFW = zeros(Nsen,length(Ksel_vec),1);
 
 %%%% parameter setting in ZOADMM
 d = Nsen; %%Optimization varaibles dimension
-options.A = eye(d);    % eye(d) ·µ»ØÒ»¸öd*d´óÐ¡µÄµ¥Î»¾ØÕó
+options.A = eye(d);    % eye(d) è¿”å›žä¸€ä¸ªd*då¤§å°çš„å•ä½çŸ©é˜µ
 options.B = -eye(d);
-options.c = zeros(d,1); %%% coefficients of equality constraint Ax + By = c  ´´½¨Ò»¸ödÐÐ1ÁÐµÄÁãÏòÁ¿¡£
+options.c = zeros(d,1); %%% coefficients of equality constraint Ax + By = c  åˆ›å»ºä¸€ä¸ªdè¡Œ1åˆ—çš„é›¶å‘é‡ã€‚
 options.rho = 1;
-options.x0 = ones(d,1)*0.5;     % ´´½¨Ò»¸ödÐÐÒ»ÁÐµÄ[0.5][0.5][0.5][0.5]
-options.y0 = inv(-options.B)*( options.A * options.x0 - options.c );  %   (Ax-c)* (-B)   inv ÊÇÄæ¾ØÕó
+options.x0 = ones(d,1)*0.5;     % åˆ›å»ºä¸€ä¸ªdè¡Œä¸€åˆ—çš„[0.5][0.5][0.5][0.5]
+options.y0 = inv(-options.B)*( options.A * options.x0 - options.c );  %   (Ax-c)* (-B)   inv æ˜¯é€†çŸ©é˜µ
 options.lam0 = zeros(d,1);
 options.a = 10; %%% Gt = aI - \eta_t*rho A'*A, Bregman divergence coefficient matrix
 options.eta_const = 1; %%% related to step size for Bregman divergence, learning rate
@@ -88,8 +88,7 @@ while 1
 end
 
 for j = 1:length(Ksel_vec) %%% different numbers of selected sensors  [5 10 15 20]. j=1,2,3,4
-        options.ksel  = Ksel_vec(j);   % Ñ¡ÔñÏòÁ¿[5 10 15 20]µÄÊýÁ¿
-        %options.ksel = 10;
+        options.ksel  = Ksel_vec(j);   % é€‰æ‹©å‘é‡[5 10 15 20]çš„æ•°é‡
         rng(2030);
         
       
@@ -98,15 +97,15 @@ for j = 1:length(Ksel_vec) %%% different numbers of selected sensors  [5 10 15 2
         
 %         %% Method 1: second order method, primal dual interior point,  CVX solver should be installed first, http://cvxr.com/cvx/
 %         A_tmp = [];
-%         for ii = 1:Nsen                     % ²ÎÊýµÄÎ¬¶È 50
-%             an = squeeze(A_allT(:,ii,:));   % A_allT(5*1*1000) ÊÇÒ»¸öÈýÎ¬Êý×é¡£ squeeze£¨£©ÓÃÓÚÉ¾³ýÊý×éÖÐµÄµ¥Î¬»ò´óÐ¡Îª 1 µÄÎ¬¶È¡£¹Êan = 5*1000
+%         for ii = 1:Nsen                     % å‚æ•°çš„ç»´åº¦ 50
+%             an = squeeze(A_allT(:,ii,:));   % A_allT(5*1*1000) æ˜¯ä¸€ä¸ªä¸‰ç»´æ•°ç»„ã€‚ squeezeï¼ˆï¼‰ç”¨äºŽåˆ é™¤æ•°ç»„ä¸­çš„å•ç»´æˆ–å¤§å°ä¸º 1 çš„ç»´åº¦ã€‚æ•…an = 5*1000
 %             A_tmp = [A_tmp , an*an.'];      % 5*250
 %         end
 %         
 %         T = size(A_allT,3);         % 1000
 %         cvx_begin   
-%         variable x_cvx(d);          % ÉèÖÃÓÅ»¯±äÁ¿ x_cvx Î¬¶ÈÎªdµÄÁÐÏòÁ¿
-%         minimize -log_det( A_tmp*kron(x_cvx,eye(size(A_allT,1))) ) ;     % ÄãÊÇÔÚ´´½¨Ò»¸öµ¥Î»¾ØÕó£¨identity matrix£©£¬Æä´óÐ¡µÈÓÚ A_allT µÄµÚÒ»Î¬µÄ´óÐ¡¡£
+%         variable x_cvx(d);          % è®¾ç½®ä¼˜åŒ–å˜é‡ x_cvx ç»´åº¦ä¸ºdçš„åˆ—å‘é‡
+%         minimize -log_det( A_tmp*kron(x_cvx,eye(size(A_allT,1))) ) ;     % ä½ æ˜¯åœ¨åˆ›å»ºä¸€ä¸ªå•ä½çŸ©é˜µï¼ˆidentity matrixï¼‰ï¼Œå…¶å¤§å°ç­‰äºŽ A_allT çš„ç¬¬ä¸€ç»´çš„å¤§å°ã€‚
 %         subject to
 %             x_cvx>=0;
 %             x_cvx<=1;
@@ -114,26 +113,26 @@ for j = 1:length(Ksel_vec) %%% different numbers of selected sensors  [5 10 15 2
 %         cvx_end
 %         
 %        [x_sel_cvx, mse_cvx ]= mse_SenSel(A_allT, x_cvx ,  options.ksel ) ; 
-%        % ·µ»Ø x_sel_cvx ÊÇÒ»¸ö¶þ½øÖÆÏòÁ¿£¬ÆäÖÐ±»Ñ¡ÖÐµÄÖµÉèÎª1. mse_cvx ¾ù·½Îó²î
+%        % è¿”å›ž x_sel_cvx æ˜¯ä¸€ä¸ªäºŒè¿›åˆ¶å‘é‡ï¼Œå…¶ä¸­è¢«é€‰ä¸­çš„å€¼è®¾ä¸º1. mse_cvx å‡æ–¹è¯¯å·®
 %        
-%        xsel_track_cvx(:,j) = x_sel_cvx;  % ×·×Ù x_cvx ÔÚ²»Í¬µÄm0
-%        mse_track_cvx(j) = mse_cvx;       % ×·×Ù mse_cvx ÔÚ²»Í¬µÄm0     
+%        xsel_track_cvx(:,j) = x_sel_cvx;  % è¿½è¸ª x_cvx åœ¨ä¸åŒçš„m0
+%        mse_track_cvx(j) = mse_cvx;       % è¿½è¸ª mse_cvx åœ¨ä¸åŒçš„m0     
 %        
 %        
 %         %%% Method 2: online ADMM
 %         options.grad_free = 0; %%% 0: full gradient
 %         options.eps = 1e-6;  %%% stopping rule
-%         options.L_sub_batch_outter = 50;  options.L_sub_batch_inner = 1; %%% sub-batch strategy  Åú´Î²ßÂÔ
+%         options.L_sub_batch_outter = 50;  options.L_sub_batch_inner = 1; %%% sub-batch strategy  æ‰¹æ¬¡ç­–ç•¥
 %         %%% call algorithm
-%         [x_ave_track_OADMM,y_ave_track_OADMM,eps_track_OADMM_tmp, obj_track_OADMM_tmp] = ZOADMM_SenSel(options); %µ÷ÓÃº¯Êý£¬ºó·µ»Ø±äÁ¿
+%         [x_ave_track_OADMM,y_ave_track_OADMM,eps_track_OADMM_tmp, obj_track_OADMM_tmp] = ZOADMM_SenSel(options); %è°ƒç”¨å‡½æ•°ï¼ŒåŽè¿”å›žå˜é‡
 %        
-%         eps_track_OADMM(:,j) = eps_track_OADMM_tmp; %% ±£´æ²»Í¬´«¸ÐÆ÷ÏÂµÄ±äÁ¿
+%         eps_track_OADMM(:,j) = eps_track_OADMM_tmp; %% ä¿å­˜ä¸åŒä¼ æ„Ÿå™¨ä¸‹çš„å˜é‡
 %         obj_track_OADMM(:,j) = obj_track_OADMM_tmp;
 %         
 %         
-%         [x_sel_OADMM, mse_OADMM ]= mse_SenSel(A_allT, x_ave_track_OADMM(:,end) ,  options.ksel ) ; % ¼ÆËã mse
+%         [x_sel_OADMM, mse_OADMM ]= mse_SenSel(A_allT, x_ave_track_OADMM(:,end) ,  options.ksel ) ; % è®¡ç®— mse
 %         
-%         mse_track_OADMM(j) = mse_OADMM;         %±£´æmse
+%         mse_track_OADMM(j) = mse_OADMM;         %ä¿å­˜mse
 %         xsel_track_OADMM(:,j) = x_sel_OADMM;
 %         
 %         
@@ -143,49 +142,48 @@ for j = 1:length(Ksel_vec) %%% different numbers of selected sensors  [5 10 15 2
 %         options.grad_free = 1; options.eps = 1e-6; 
 %         options.L_sub_batch_outter = 1;  options.L_sub_batch_inner = 50;
 %         
-%         [x_ave_track_ZOADMM,y_ave_track_ZOADMM,eps_track_ZOADMM_tmp, obj_track_ZOADMM_tmp] = ZOADMM_SenSel(options);  % µ÷ÓÃËã·¨
+%         [x_ave_track_ZOADMM,y_ave_track_ZOADMM,eps_track_ZOADMM_tmp, obj_track_ZOADMM_tmp] = ZOADMM_SenSel(options);  % è°ƒç”¨ç®—æ³•
 %         
-%         eps_track_ZOADMM(:,j) = eps_track_ZOADMM_tmp; % ±£´æ 
+%         eps_track_ZOADMM(:,j) = eps_track_ZOADMM_tmp; % ä¿å­˜ 
 %         obj_track_ZOADMM(:,j) = obj_track_ZOADMM_tmp;
 %         
-%         [x_sel_ZOADMM, mse_ZOADMM ]= mse_SenSel(A_allT, x_ave_track_ZOADMM(:,end) ,  options.ksel ) ;  % ¼ÆËã
+%         [x_sel_ZOADMM, mse_ZOADMM ]= mse_SenSel(A_allT, x_ave_track_ZOADMM(:,end) ,  options.ksel ) ;  % è®¡ç®—
 %         mse_track_ZOADMM(j) = mse_ZOADMM;
 %         xsel_track_ZOADMM(:,j) = x_sel_ZOADMM;
 % %         
-% 48576        
-%          % Method4£ºzhu
-%         [x_ave_track_ZO_adaSFW, eps_track_ZO_adaSFW_tmp, obj_track_ZO_adaSFW_tmp] = ZO_adaSFW_SenSel(options);
-%         eps_track_ZO_adaSFW(:,j) = eps_track_ZO_adaSFW_tmp; %% ±£´æ²»Í¬´«¸ÐÆ÷ÏÂµÄ±äÁ¿
-%         obj_track_ZO_adaSFW(:,j) = obj_track_ZO_adaSFW_tmp;
-%         
-%         [x_sel_ZO_adaSFW, mse_ZO_adaSFW ]= mse_SenSel(A_allT, x_ave_track_ZO_adaSFW(:,end) ,  options.ksel ) ; % ¼ÆËã mse
-%         
-%         mse_track_ZO_adaSFW(j) = mse_ZO_adaSFW;         %±£´æmse
-%         xsel_track_ZO_adaSFW(:,j) = x_sel_ZO_adaSFW;
-%         disp(sprintf('adaSFW for mse = %4.5f',...
-%            mse_ZO_adaSFW )); 
+        
+         % Method1ï¼šzhu
+         [x_ave_track_ZO_adaSFW, eps_track_ZO_adaSFW_tmp, obj_track_ZO_adaSFW_tmp] = ZO_adaSFW_SenSel(options);
+         eps_track_ZO_adaSFW(:,j) = eps_track_ZO_adaSFW_tmp; 
+         obj_track_ZO_adaSFW(:,j) = obj_track_ZO_adaSFW_tmp;
+         
+         [x_sel_ZO_adaSFW, mse_ZO_adaSFW ]= mse_SenSel(A_allT, x_ave_track_ZO_adaSFW(:,end) ,  options.ksel ) ; 
+         
+         mse_track_ZO_adaSFW(j) = mse_ZO_adaSFW;         
+         xsel_track_ZO_adaSFW(:,j) = x_sel_ZO_adaSFW;
+        
        
-         %% Method8:SFW_grad
+        % Method2: SFW_grad
         [x_ave_track_SFW_grad, eps_track_SFW_grad_tmp, obj_track_SFW_grad_tmp, obj_track_SFW_grad_50_tmp] = SFW_grad_SenSel(options);
-        eps_track_SFW_grad(:,j) = eps_track_SFW_grad_tmp; %% ±£´æ²»Í¬´«¸ÐÆ÷ÏÂµÄ±äÁ¿
+        eps_track_SFW_grad(:,j) = eps_track_SFW_grad_tmp; %% ä¿å­˜ä¸åŒä¼ æ„Ÿå™¨ä¸‹çš„å˜é‡
         obj_track_SFW_grad(:,j) = obj_track_SFW_grad_tmp;
         obj_track_SFW_grad_50(:,j) = obj_track_SFW_grad_50_tmp;
         
-        [x_sel_SFW_grad, mse_SFW_grad ]= mse_SenSel(A_allT, x_ave_track_SFW_grad(:,end) ,  options.ksel ) ; % ¼ÆËã mse
+        [x_sel_SFW_grad, mse_SFW_grad ]= mse_SenSel(A_allT, x_ave_track_SFW_grad(:,end) ,  options.ksel ) ; % è®¡ç®— mse
         
-        mse_track_SFW_grad(j) = mse_SFW_grad;         %±£´æmse
+        mse_track_SFW_grad(j) = mse_SFW_grad;         %ä¿å­˜mse
         xsel_track_SFW_grad(:,j) = x_sel_SFW_grad;
         
        
 %             %% Method5:ZSCG
 %         [x_ave_track_ZSCG, eps_track_ZSCG_tmp, obj_track_ZSCG_tmp,obj_track_ZSCG_50_tmp] = ZSCG_SenSel(options);
-%         eps_track_ZSCG(:,j) = eps_track_ZSCG_tmp; %% ±£´æ²»Í¬´«¸ÐÆ÷ÏÂµÄ±äÁ¿
+%         eps_track_ZSCG(:,j) = eps_track_ZSCG_tmp; %% ä¿å­˜ä¸åŒä¼ æ„Ÿå™¨ä¸‹çš„å˜é‡
 %         obj_track_ZSCG(:,j) = obj_track_ZSCG_tmp;
 %         obj_track_ZSCG_50(:,j) = obj_track_ZSCG_50_tmp;
 %         
-%         [x_sel_ZSCG, mse_ZSCG ]= mse_SenSel(A_allT, x_ave_track_ZSCG(:,end) ,  options.ksel ) ; % ¼ÆËã mse
+%         [x_sel_ZSCG, mse_ZSCG ]= mse_SenSel(A_allT, x_ave_track_ZSCG(:,end) ,  options.ksel ) ; % è®¡ç®— mse
 %         
-%         mse_track_ZSCG(j) = mse_ZSCG;         %±£´æmse
+%         mse_track_ZSCG(j) = mse_ZSCG;         %ä¿å­˜mse
 %         xsel_track_ZSCG(:,j) = x_sel_ZSCG;
 %        
 %    
@@ -195,80 +193,80 @@ for j = 1:length(Ksel_vec) %%% different numbers of selected sensors  [5 10 15 2
 %         
 %        %% Method7:FZFW
 %         [x_ave_track_FZFW, eps_track_FZFW_tmp, obj_track_FZFW_tmp] = FZFW_SenSel(options);
-%         eps_track_FZFW(:,j) = eps_track_FZFW_tmp; %% ±£´æ²»Í¬´«¸ÐÆ÷ÏÂµÄ±äÁ¿
+%         eps_track_FZFW(:,j) = eps_track_FZFW_tmp; %% ä¿å­˜ä¸åŒä¼ æ„Ÿå™¨ä¸‹çš„å˜é‡
 %         obj_track_FZFW(:,j) = obj_track_FZFW_tmp;
 %         
-%         [x_sel_FZFW, mse_FZFW ]= mse_SenSel(A_allT, x_ave_track_FZFW(:,end) ,  options.ksel ) ; % ¼ÆËã mse
+%         [x_sel_FZFW, mse_FZFW ]= mse_SenSel(A_allT, x_ave_track_FZFW(:,end) ,  options.ksel ) ; % è®¡ç®— mse
 %         
-%         mse_track_FZFW(j) = mse_FZFW;         %±£´æmse
+%         mse_track_FZFW(j) = mse_FZFW;         %ä¿å­˜mse
 %         xsel_track_FZFW(:,j) = x_sel_FZFW;
         
          %% Method6:ZO-SFW
         [x_ave_track_ZO_SFW, eps_track_ZO_SFW_tmp, obj_track_ZO_SFW_tmp, obj_track_ZO_SFW_50_tmp] = ZO_SFW_SenSel(options);
-        eps_track_ZO_SFW(:,j) = eps_track_ZO_SFW_tmp; %% ±£´æ²»Í¬´«¸ÐÆ÷ÏÂµÄ±äÁ¿
+        eps_track_ZO_SFW(:,j) = eps_track_ZO_SFW_tmp; %% ä¿å­˜ä¸åŒä¼ æ„Ÿå™¨ä¸‹çš„å˜é‡
         obj_track_ZO_SFW(:,j) = obj_track_ZO_SFW_tmp;
         obj_track_ZO_SFW_50(:,j) = obj_track_ZO_SFW_50_tmp;
         
-        [x_sel_ZO_SFW, mse_ZO_SFW ]= mse_SenSel(A_allT, x_ave_track_ZO_SFW(:,end) ,  options.ksel ) ; % ¼ÆËã mse
+        [x_sel_ZO_SFW, mse_ZO_SFW ]= mse_SenSel(A_allT, x_ave_track_ZO_SFW(:,end) ,  options.ksel ) ; % è®¡ç®— mse
         
-        mse_track_ZO_SFW(j) = mse_ZO_SFW;         %±£´æmse
+        mse_track_ZO_SFW(j) = mse_ZO_SFW;         %ä¿å­˜mse
         xsel_track_ZO_SFW(:,j) = x_sel_ZO_SFW;
       
        
         
       %% Method9:ACC_UN
 %         [x_ave_track_ACC_UN, eps_track_ACC_UN_tmp, obj_track_ACC_UN_tmp,obj_track_ACC_UN_50_tmp] = ACC_UN_SenSel(options);
-%         eps_track_ACC_UN(:,j) = eps_track_ACC_UN_tmp; %% ±£´æ²»Í¬´«¸ÐÆ÷ÏÂµÄ±äÁ¿
+%         eps_track_ACC_UN(:,j) = eps_track_ACC_UN_tmp; %% ä¿å­˜ä¸åŒä¼ æ„Ÿå™¨ä¸‹çš„å˜é‡
 %         obj_track_ACC_UN(:,j) = obj_track_ACC_UN_tmp;
 %         obj_track_ACC_UN_50(:,j) = obj_track_ACC_UN_50_tmp;
 %         
-%         [x_sel_ACC_UN, mse_ACC_UN ]= mse_SenSel(A_allT, x_ave_track_ACC_UN(:,end) ,  options.ksel ) ; % ¼ÆËã mse
+%         [x_sel_ACC_UN, mse_ACC_UN ]= mse_SenSel(A_allT, x_ave_track_ACC_UN(:,end) ,  options.ksel ) ; % è®¡ç®— mse
 %         
-%         mse_track_ACC_UN(j) = mse_ACC_UN;         %±£´æmse
+%         mse_track_ACC_UN(j) = mse_ACC_UN;         %ä¿å­˜mse
 %         xsel_track_ACC_UN(:,j) = x_sel_ACC_UN; 
 %         
 %         
 %         % Method10:ACC_UNS
 %         [x_ave_track_ACC_UNS, eps_track_ACC_UNS_tmp, obj_track_ACC_UNS_tmp,obj_track_ACC_UNS_50_tmp] = ACC_UNS_SenSel(options);
-%         eps_track_ACC_UNS(:,j) = eps_track_ACC_UNS_tmp; %% ±£´æ²»Í¬´«¸ÐÆ÷ÏÂµÄ±äÁ¿
+%         eps_track_ACC_UNS(:,j) = eps_track_ACC_UNS_tmp; %% ä¿å­˜ä¸åŒä¼ æ„Ÿå™¨ä¸‹çš„å˜é‡
 %         obj_track_ACC_UNS(:,j) = obj_track_ACC_UNS_tmp;
 %         obj_track_ACC_UNS_50(:,j) = obj_track_ACC_UNS_50_tmp;
 %         
-%         [x_sel_ACC_UNS, mse_ACC_UNS ]= mse_SenSel(A_allT, x_ave_track_ACC_UNS(:,end) ,  options.ksel ) ; % ¼ÆËã mse
+%         [x_sel_ACC_UNS, mse_ACC_UNS ]= mse_SenSel(A_allT, x_ave_track_ACC_UNS(:,end) ,  options.ksel ) ; % è®¡ç®— mse
 %         
-%         mse_track_ACC_UNS(j) = mse_ACC_UNS;         %±£´æmse
+%         mse_track_ACC_UNS(j) = mse_ACC_UNS;         %ä¿å­˜mse
 %         xsel_track_ACC_UNS(:,j) = x_sel_ACC_UNS; 
 %         
 %         %% Method11:ACC_CO
 %         [x_ave_track_ACC_CO, eps_track_ACC_CO_tmp, obj_track_ACC_CO_tmp] = ACC_Co_SenSel(options);
-%         eps_track_ACC_CO(:,j) = eps_track_ACC_CO_tmp; %% ±£´æ²»Í¬´«¸ÐÆ÷ÏÂµÄ±äÁ¿
+%         eps_track_ACC_CO(:,j) = eps_track_ACC_CO_tmp; %% ä¿å­˜ä¸åŒä¼ æ„Ÿå™¨ä¸‹çš„å˜é‡
 %         obj_track_ACC_CO(:,j) = obj_track_ACC_CO_tmp;
 %         
-%         [x_sel_ACC_CO, mse_ACC_CO ]= mse_SenSel(A_allT, x_ave_track_ACC_CO(:,end) ,  options.ksel ) ; % ¼ÆËã mse
+%         [x_sel_ACC_CO, mse_ACC_CO ]= mse_SenSel(A_allT, x_ave_track_ACC_CO(:,end) ,  options.ksel ) ; % è®¡ç®— mse
 %         
-%         mse_track_ACC_CO(j) = mse_ACC_CO;         %±£´æmse
+%         mse_track_ACC_CO(j) = mse_ACC_CO;         %ä¿å­˜mse
 %         xsel_track_ACC_CO(:,j) = x_sel_ACC_CO; 
 %         
 %         %% Method12:ACC_COS
 %         [x_ave_track_ACC_COS, eps_track_ACC_COS_tmp, obj_track_ACC_COS_tmp] = ACC_COS_SenSel(options);
-%         eps_track_ACC_COS(:,j) = eps_track_ACC_COS_tmp; %% ±£´æ²»Í¬´«¸ÐÆ÷ÏÂµÄ±äÁ¿
+%         eps_track_ACC_COS(:,j) = eps_track_ACC_COS_tmp; %% ä¿å­˜ä¸åŒä¼ æ„Ÿå™¨ä¸‹çš„å˜é‡
 %         obj_track_ACC_COS(:,j) = obj_track_ACC_COS_tmp;
 %         
-%         [x_sel_ACC_COS, mse_ACC_COS ]= mse_SenSel(A_allT, x_ave_track_ACC_COS(:,end) ,  options.ksel ) ; % ¼ÆËã mse
+%         [x_sel_ACC_COS, mse_ACC_COS ]= mse_SenSel(A_allT, x_ave_track_ACC_COS(:,end) ,  options.ksel ) ; % è®¡ç®— mse
 %         
-%         mse_track_ACC_COS(j) = mse_ACC_COS;         %±£´æmse
+%         mse_track_ACC_COS(j) = mse_ACC_COS;         %ä¿å­˜mse
 %         xsel_track_ACC_COS(:,j) = x_sel_ACC_COS; 
 %         
 % %         
 %          %% Method13:Ada_SFW
 %         [x_ave_track_Ada_SFW, eps_track_Ada_SFW_tmp, obj_track_Ada_SFW_tmp,obj_track_Ada_SFW_50_tmp] = AdaSFW_SenSel(options);
-%         eps_track_Ada_SFW(:,j) = eps_track_Ada_SFW_tmp; %% ±£´æ²»Í¬´«¸ÐÆ÷ÏÂµÄ±äÁ¿
+%         eps_track_Ada_SFW(:,j) = eps_track_Ada_SFW_tmp; %% ä¿å­˜ä¸åŒä¼ æ„Ÿå™¨ä¸‹çš„å˜é‡
 %         obj_track_Ada_SFW(:,j) = obj_track_Ada_SFW_tmp;
 %         obj_track_Ada_SFW_50(:,j) = obj_track_Ada_SFW_50_tmp;
 %         
-%         [x_sel_Ada_SFW, mse_Ada_SFW ]= mse_SenSel(A_allT, x_ave_track_Ada_SFW(:,end) ,  options.ksel ) ; % ¼ÆËã mse
+%         [x_sel_Ada_SFW, mse_Ada_SFW ]= mse_SenSel(A_allT, x_ave_track_Ada_SFW(:,end) ,  options.ksel ) ; % è®¡ç®— mse
 %         
-%         mse_track_Ada_SFW(j) = mse_Ada_SFW;         %±£´æmse
+%         mse_track_Ada_SFW(j) = mse_Ada_SFW;         %ä¿å­˜mse
 %         xsel_track_Ada_SFW(:,j) = x_sel_Ada_SFW;
 % %   
 
