@@ -38,7 +38,7 @@ cd app
 
 python run.py
 
-#### Data
+#### Result
 
 The result are save in ./app/results/tsdata/ZO_AdaSFW/CooGE/ada.xlsx
 
@@ -83,7 +83,7 @@ There are 10 algorithms. Select algorithm to run
  
 """
 
-#### Data
+#### Result
 
 The result are save in ./content/results/
 
