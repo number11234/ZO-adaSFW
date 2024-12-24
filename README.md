@@ -35,6 +35,7 @@ wget -P ~/datasets/covtype/ https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datas
 #### Run
 
 cd app
+
 python run.py
 
 #### Data
